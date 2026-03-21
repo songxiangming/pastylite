@@ -1,0 +1,23 @@
+# Build output
+**/bin/
+**/obj/
+
+# Publish output
+**/publish/
+
+# Visual Studio / IDE
+.vs/
+*.user
+*.suo
+
+# NuGet
+**/packages/
+
+# Runtime-generated (SQLite)
+*.db
+*.db-shm
+*.db-wal
+
+# OS files
+Thumbs.db
+Desktop.ini
