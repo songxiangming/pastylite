@@ -42,12 +42,27 @@ public partial class App : Application
         base.OnStartup(e);
         ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
+        // Determine data directory: use LocalAppData for dotnet-run, exe directory for published
+        var processName = Path.GetFileName(Environment.ProcessPath) ?? "";
+        string dataDir;
+        if (processName.Equals("dotnet.exe", StringComparison.OrdinalIgnoreCase) ||
+            processName.Equals("dotnet", StringComparison.OrdinalIgnoreCase))
+        {
+            dataDir = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Pasty");
+            Directory.CreateDirectory(dataDir);
+        }
+        else
+        {
+            dataDir = AppContext.BaseDirectory;
+        }
+
         // Load settings
-        _settingsPath = Path.Combine(AppContext.BaseDirectory, "settings.json");
+        _settingsPath = Path.Combine(dataDir, "settings.json");
         _settings = AppSettings.Load(_settingsPath);
 
-        // Database path: next to the exe
-        var dbPath = Path.Combine(AppContext.BaseDirectory, "pasty.db");
+        // Database path
+        var dbPath = Path.Combine(dataDir, "pasty.db");
 
         // Initialize database
         var dbInit = new DatabaseInitializer(dbPath);
