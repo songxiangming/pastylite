@@ -93,16 +93,6 @@ public class PopupViewModel : INotifyPropertyChanged
         }
     }
 
-    public void UpdateOcrText(long id, string ocrText)
-    {
-        var existing = _allItems.FirstOrDefault(vm => vm.Id == id);
-        if (existing != null)
-        {
-            existing.SetOcrText(ocrText);
-            ApplyFilter();
-        }
-    }
-
     private void ApplyFilter()
     {
         var filtered = _searchService.Filter(_allItems, _searchText);

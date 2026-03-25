@@ -25,7 +25,6 @@ public partial class App : Application
     private AppSettings? _settings;
     private string? _settingsPath;
     private IntPtr _mainHwnd;
-    private OcrService? _ocrService;
 
     protected override async void OnStartup(StartupEventArgs e)
     {
@@ -75,7 +74,6 @@ public partial class App : Application
         _clipboardMonitor = new ClipboardMonitor();
         _hotkeyManager = new HotkeyManager();
         _pasteService = new PasteService(_clipboardMonitor, _clipboardStore);
-        _ocrService = new OcrService();
 
         // Create popup
         _popupViewModel = new PopupViewModel(_clipboardStore, _pasteService);
@@ -92,25 +90,6 @@ public partial class App : Application
             {
                 _popupViewModel?.AddNewItem(item);
             });
-
-            // Fire background OCR for image items
-            if (item.Format == ClipboardFormat.Image && item.ImagePng != null && _ocrService?.IsAvailable == true)
-            {
-                var pngBytes = item.ImagePng;
-                var itemId = id;
-                _ = Task.Run(async () =>
-                {
-                    var ocrText = _ocrService.ExtractText(pngBytes);
-                    if (!string.IsNullOrEmpty(ocrText))
-                    {
-                        await _clipboardStore!.UpdateOcrTextAsync(itemId, ocrText);
-                        Dispatcher.Invoke(() =>
-                        {
-                            _popupViewModel?.UpdateOcrText(itemId, ocrText);
-                        });
-                    }
-                });
-            }
         };
 
         // Wire up hotkey
@@ -187,7 +166,6 @@ public partial class App : Application
         _hotkeyManager?.Dispose();
         _clipboardMonitor?.Dispose();
         _trayService?.Dispose();
-        _ocrService?.Dispose();
         _clipboardStore?.Dispose();
         _singleInstanceMutex?.ReleaseMutex();
         _singleInstanceMutex?.Dispose();

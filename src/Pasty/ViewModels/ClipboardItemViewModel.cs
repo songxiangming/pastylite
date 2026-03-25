@@ -40,13 +40,6 @@ public class ClipboardItemViewModel
         {
             if (Format == ClipboardFormat.Image)
             {
-                if (!string.IsNullOrEmpty(_item.OcrText))
-                {
-                    var preview = _item.OcrText.Length > 80
-                        ? _item.OcrText[..80] + "..."
-                        : _item.OcrText;
-                    return $"(Image) {preview}";
-                }
                 return "(Image)";
             }
 
@@ -65,12 +58,7 @@ public class ClipboardItemViewModel
         }
     }
 
-    public string SearchText => _item.PreviewText ?? _item.OcrText ?? _item.FilePaths ?? "";
-
-    public void SetOcrText(string ocrText)
-    {
-        _item.OcrText = ocrText;
-    }
+    public string SearchText => _item.PreviewText ?? _item.FilePaths ?? "";
 
     public string RelativeTime
     {

@@ -14,7 +14,8 @@
       "Bash(powershell.exe -Command \"& 'C:\\\\Program Files\\\\dotnet\\\\dotnet.exe' nuget add source https://api.nuget.org/v3/index.json -n nuget.org 2>&1\")",
       "WebFetch(domain:github.com)",
       "Bash(dotnet restore:*)",
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "Bash(dotnet clean:*)"
     ]
   }
 }
