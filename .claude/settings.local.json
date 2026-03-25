@@ -15,7 +15,8 @@
       "WebFetch(domain:github.com)",
       "Bash(dotnet restore:*)",
       "Bash(dotnet build:*)",
-      "Bash(dotnet clean:*)"
+      "Bash(dotnet clean:*)",
+      "Bash(dotnet list:*)"
     ]
   }
 }
