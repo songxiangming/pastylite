@@ -16,7 +16,9 @@
       "Bash(dotnet restore:*)",
       "Bash(dotnet build:*)",
       "Bash(dotnet clean:*)",
-      "Bash(dotnet list:*)"
+      "Bash(dotnet list:*)",
+      "Bash(dotnet msbuild:*)",
+      "Bash(dotnet store:*)"
     ]
   }
 }

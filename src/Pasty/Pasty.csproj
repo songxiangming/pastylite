@@ -28,4 +28,20 @@
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <RuntimeHostConfigurationOption Include="System.Runtime.TieredCompilation" Value="true" />
+  </ItemGroup>
+
+  <!-- Force specific runtime versions -->
+  <Target Name="ForceRuntimeVersion" BeforeTargets="ProcessFrameworkReferences">
+    <ItemGroup>
+      <KnownRuntimePack Update="Microsoft.AspNetCore.App">
+        <LatestRuntimeFrameworkVersion>8.0.25</LatestRuntimeFrameworkVersion>
+      </KnownRuntimePack>
+      <KnownRuntimePack Update="Microsoft.NETCore.App">
+        <LatestRuntimeFrameworkVersion>8.0.25</LatestRuntimeFrameworkVersion>
+      </KnownRuntimePack>
+    </ItemGroup>
+  </Target>
+
 </Project>
