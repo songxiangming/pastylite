@@ -11,8 +11,6 @@
 
     <!-- Single-file publish settings -->
     <PublishSingleFile>true</PublishSingleFile>
-    <SelfContained>true</SelfContained>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PublishTrimmed>false</PublishTrimmed>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
@@ -27,21 +25,5 @@
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.11" />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.10" />
   </ItemGroup>
-
-  <ItemGroup>
-    <RuntimeHostConfigurationOption Include="System.Runtime.TieredCompilation" Value="true" />
-  </ItemGroup>
-
-  <!-- Force specific runtime versions -->
-  <Target Name="ForceRuntimeVersion" BeforeTargets="ProcessFrameworkReferences">
-    <ItemGroup>
-      <KnownRuntimePack Update="Microsoft.AspNetCore.App">
-        <LatestRuntimeFrameworkVersion>8.0.25</LatestRuntimeFrameworkVersion>
-      </KnownRuntimePack>
-      <KnownRuntimePack Update="Microsoft.NETCore.App">
-        <LatestRuntimeFrameworkVersion>8.0.25</LatestRuntimeFrameworkVersion>
-      </KnownRuntimePack>
-    </ItemGroup>
-  </Target>
 
 </Project>
